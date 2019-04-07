@@ -43,5 +43,6 @@
         android:layout_marginLeft="120dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_button"/>
+        android:background="@drawable/bg_button"
+        />
 </LinearLayout>

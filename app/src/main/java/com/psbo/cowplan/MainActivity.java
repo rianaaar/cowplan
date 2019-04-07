@@ -3,12 +3,15 @@ package com.psbo.cowplan;
 import android.app.usage.UsageEvents;
 import android.arch.lifecycle.Lifecycle;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +26,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button button;
     CalendarView calendarView;
     TextView myDate;
 
@@ -42,7 +46,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
        });
+    button = (Button) findViewById(R.id.button);
+    button.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            open_input_date();
+        }
+    });
 
+    }
 
-    };
+    public void open_input_date() {
+        Intent intent = new Intent(this, input_date.class);
+        startActivity(intent);
+    }
 };
