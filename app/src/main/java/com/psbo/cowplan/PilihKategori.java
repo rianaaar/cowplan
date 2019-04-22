@@ -16,6 +16,19 @@ public class PilihKategori extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_date);
+
+        button = (Button) findViewById(R.id.Button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open_MainActivity();
+            }
+        });
+    }
+
+    public void open_MainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 }
