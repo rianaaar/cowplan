@@ -36,6 +36,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/Button"
         android:text="Tambah Tanggal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"

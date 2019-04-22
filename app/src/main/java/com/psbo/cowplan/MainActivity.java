@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
        });
-    button = (Button) findViewById(R.id.button);
+    button = (Button) findViewById(R.id.Button);
     button.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void open_input_date() {
-        Intent intent = new Intent(this, input_date.class);
+        Intent intent = new Intent(this, PilihKategori.class);
         startActivity(intent);
     }
 };

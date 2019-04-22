@@ -9,7 +9,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class input_date extends AppCompatActivity {
+public class PilihKategori extends AppCompatActivity {
     private Button button;
 
     @Override
