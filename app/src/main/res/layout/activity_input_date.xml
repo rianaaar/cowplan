@@ -10,7 +10,8 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#B8D427">
 
     <TextView
         android:id="@+id/mydate"
@@ -56,7 +57,7 @@
         android:layout_gravity="center"
         android:text="Tambahkan"
         android:textColor="FFF"
-        android:background="#2a50fa"
+        android:background="#A04003"
         />
 
 
