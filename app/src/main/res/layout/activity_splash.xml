@@ -8,9 +8,8 @@
         android:id="@+id/imgLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="#2a50fa"
-        android:src="@drawable/cowplan" />
+        android:background="#B8D427"
+        android:src="@drawable/myyyy" />
 
 
 
