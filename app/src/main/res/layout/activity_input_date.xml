@@ -41,7 +41,7 @@
         android:textSize="25dp"/>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/namasapi"
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,13 +59,7 @@
         android:layout_gravity="center"
         android:text="Tambahkan"
         android:textColor="#FFFF"
-<<<<<<< HEAD
         android:background="#2a50fa"
 />
-=======
-        android:background="#A04003"
-        />
-
->>>>>>> ce108ca88217fed747846962e8436d7f8fb6f7e8
 
 </LinearLayout>

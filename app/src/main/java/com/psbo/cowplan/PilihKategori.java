@@ -1,15 +1,23 @@
 package com.psbo.cowplan;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.psbo.cowplan.Model.data_sapi;
+
+import static android.text.TextUtils.isEmpty;
+
 public class PilihKategori extends AppCompatActivity {
+    private EditText nama_sapi, tanggal_birahi, tanggal_melahirkan;
+    private FirebaseAuth auth;
     private Button button;
 
     @Override
@@ -18,17 +26,58 @@ public class PilihKategori extends AppCompatActivity {
         setContentView(R.layout.activity_input_date);
 
         button = (Button) findViewById(R.id.Button);
+        auth = FirebaseAuth.getInstance(); //Mendapakan Instance Firebase Autentifikasi
+
+        //Inisialisasi ID (EditText)
+        nama_sapi = findViewById(R.id.namasapi);
+        //tanggal_birahi = findViewById(R.id.nama);
+        //tanggal_melahirkan = findViewById(R.id.jurusan);
+        input_sapi();
+
+    }
+
+    public void input_sapi(){
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                open_MainActivity();
+                //Mendapatkan UserID dari pengguna yang Terautentikasi
+                String getUserID = auth.getCurrentUser().getUid();
+
+                //Mendapatkan Instance dari Database
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference getReference;
+
+                //Menyimpan Data yang diinputkan User kedalam Variable
+                String getNama_sapi = nama_sapi.getText().toString();
+                String getTanggal_birahi = tanggal_birahi.getText().toString();
+                String getTanggal_melahirkan = tanggal_melahirkan.getText().toString();
+
+                getReference = database.getReference(); // Mendapatkan Referensi dari Database
+
+                // Mengecek apakah ada data yang kosong
+                if(isEmpty(getNama_sapi) && isEmpty(getTanggal_birahi) && isEmpty(getTanggal_melahirkan)){
+                    //Jika Ada, maka akan menampilkan pesan singkan seperti berikut ini.
+                    Toast.makeText(PilihKategori.this, "Data tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
+                }else {
+        /*
+        Jika Tidak, maka data dapat diproses dan meyimpannya pada Database
+        Menyimpan data referensi pada Database berdasarkan User ID dari masing-masing Akun
+        */
+                    getReference.child("Peternak").child(getUserID).child("Sapi").push()
+                            .setValue(new data_sapi(getNama_sapi, getTanggal_birahi, getTanggal_melahirkan)).addOnSuccessListener(this, new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Object o) {
+                                    //Peristiwa ini terjadi saat user berhasil menyimpan datanya kedalam Database
+                                    nama_sapi.setText("");
+                                    tanggal_birahi.setText("");
+                                    tanggal_melahirkan.setText("");
+                                    Toast.makeText(PilihKategori.this, "Data Tersimpan", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+                //open_MainActivity();
             }
         });
-    }
-
-    public void open_MainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
     }
 
 }
