@@ -1,126 +1,140 @@
 package com.psbo.cowplan;
 
-import android.app.usage.UsageEvents;
-import android.arch.lifecycle.Lifecycle;
-import android.content.Context;
+
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.icu.util.Calendar;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
+import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.github.sundeepk.compactcalendarview.CompactCalendarView;
-import com.github.sundeepk.compactcalendarview.domain.Event;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
+    public String temporary;
+    public String userid;
+    public static int cx,cy ;
+    private FirebaseDatabase mFirebaseDatabase;
+    private static DatabaseReference mUserDatabase;
+    private FirebaseAuth mAuth;
+    private static DatabaseReference myRef;
+    private int MODE_PRIVATE;
     private Button button;
-    CalendarView calendarView;
-    TextView myDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        button = (Button) findViewById(R.id.btn_cal);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+        startauthentication();
+
+
         setContentView(R.layout.activity_main);
 
-        calendarView = (CalendarView) findViewById(R.id.calendarView);
-        myDate = (TextView) findViewById(R.id.mydate);
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String date = dayOfMonth + "/" + (month+1) + "/" + year;
-                myDate.setText(date);
-                int date2 = convertToJulian(date);
-                int prediksibirahi = siklusbirahi(date2);
-                String datebirahi = JulianToDate(prediksibirahi);
+        SharedPreferences mPreferences;
+        mPreferences = MainActivity.this.getSharedPreferences("User", MODE_PRIVATE);
 
-            }
-       });
-    button = (Button) findViewById(R.id.Button);
-    button.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            open_input_date();
-        }
-    });
+        temporary = mPreferences.getString("saveuserid", "");
 
-    }
+        if(temporary!= null && !temporary.isEmpty()) {
 
-    public void open_input_date() {
-        Intent intent = new Intent(this, PilihKategori.class);
-        startActivity(intent);
-    }
+            mAuth = FirebaseAuth.getInstance();
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            myRef = mFirebaseDatabase.getReference();
+            FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            userid = currentFirebaseUser.getUid();
 
-    public int convertToJulian(String unformattedDate)
-    {
-        /*Unformatted Date: ddmmyyyy*/
-        int resultJulian = 0;
-        if(unformattedDate.length() > 0)
+
+
+        } else
         {
-            /*Days of month*/
-            int[] monthValues = {31,28,31,30,31,30,31,31,30,31,30,31};
 
-            String dayS, monthS, yearS;
-            dayS = unformattedDate.substring(0,2);
-            monthS = unformattedDate.substring(3, 5);
-            yearS = unformattedDate.substring(6, 10);
 
-            /*Convert to Integer*/
-            int day = Integer.valueOf(dayS);
-            int month = Integer.valueOf(monthS);
-            int year = Integer.valueOf(yearS);
-
-            //Leap year check
-            if(year % 4 == 0)
-            {
-                monthValues[1] = 29;
-            }
-            //Start building Julian date
-            String julianDate = "1";
-            //last two digit of year: 2012 ==> 12
-            julianDate += yearS.substring(2,4);
-
-            int julianDays = 0;
-            for (int i=0; i < month-1; i++)
-            {
-                julianDays += monthValues[i];
-            }
-            julianDays += day;
-
-            if(String.valueOf(julianDays).length() < 2)
-            {
-                julianDate += "00";
-            }
-            if(String.valueOf(julianDays).length() < 3)
-            {
-                julianDate += "0";
-            }
-
-            julianDate += String.valueOf(julianDays);
-            resultJulian =  Integer.valueOf(julianDate);
         }
-        return resultJulian;
-    }
-    public int siklusbirahi(int date2){
-        int hasil= date2+21;
-        return hasil;
-    }
-    public String JulianToDate(int tgl){
-        String tanggal="0";
-        return tanggal; //ini blm selesai
+
+
     }
 
-};
+    public void startauthentication(){
+
+        SharedPreferences mPreferences;
+        mPreferences = getSharedPreferences("User", MODE_PRIVATE);
+
+        temporary = mPreferences.getString("saveuserid", "");
+
+        if(temporary!= null && !temporary.isEmpty()){
+
+
+        }
+
+        else{
+
+
+            Intent y = new Intent(MainActivity.this, PhoneAuthActivity.class);
+            y.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            y.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(y);
+
+        }
+    }
+
+
+    public void signoutbutton(View s) {
+        if (s.getId() == R.id.sign_out) {
+
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage("Do you really want to Log Out ?").setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+
+                            SharedPreferences mPreferences;
+
+                            mPreferences = getSharedPreferences("User", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = mPreferences.edit();
+                            editor.clear();
+                            editor.apply();
+                            mAuth.signOut();
+
+                            Intent y = new Intent(MainActivity.this, PhoneAuthActivity.class);
+                            y.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            y.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(y);
+
+
+
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.setTitle("Confirm");
+            dialog.show();
+
+
+        }
+
+        }
+
+}

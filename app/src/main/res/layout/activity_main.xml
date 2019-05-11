@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,41 +9,33 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/mydate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="KALENDER"
-        android:textColor="#FFF"
-        android:textSize="23dp"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="50dp"
-        />
-
-    <LinearLayout
-        android:layout_marginTop="48dp"
-        android:background="@drawable/bg_calendar"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="55dp">
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="wrap_content"
-            android:layout_height="340dp">
-
-        </CalendarView>
-
-    </LinearLayout>
-
     <Button
-        android:id="@+id/Button"
-        android:text="Tambah Tanggal"
+        android:id="@+id/btn_cal"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:textColor="#ffffff"
+        android:background="#A04003"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="120dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_button"
-        />
-</LinearLayout>
+        android:textSize="15dp"
+        android:text="Calender"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="135dp"
+ />
+
+    <Button
+        android:id="@+id/sign_out"
+        android:layout_width="140dp"
+        android:onClick="signoutbutton"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="#ffffff"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="15dp"
+        android:text="Sign Out"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
