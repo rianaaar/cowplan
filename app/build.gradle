@@ -34,7 +34,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.android.gms:play-services:12.0.1'
     implementation 'com.firebaseui:firebase-ui-auth:3.2.2'
+<<<<<<< HEAD
     //implementation 'com.google.android.gms:play-services-tasks:12.0.1'
+=======
+
+    implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
+>>>>>>> cc7c31f79e08e5ee561c2d3c55e47f814a66ecc6
 }
 
 apply plugin: 'com.google.gms.google-services'
