@@ -8,7 +8,6 @@
     android:background="#B8D427"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
     <TextView
         android:id="@+id/mydate"
         android:layout_width="wrap_content"
@@ -19,21 +18,26 @@
         android:layout_marginLeft="150dp"
         android:layout_marginTop="50dp"
         />
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/compactcalendar_view"
+        android:layout_width="350dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="30dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_height="250dp"
+        app:compactCalendarTargetHeight="250dp"
+        app:compactCalendarTextSize="12sp"
+        app:compactCalendarBackgroundColor="#95D329"
+        app:compactCalendarTextColor="#fff"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
+        app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
+        app:compactCalendarMultiEventIndicatorColor="#fff"
+        />
 
-    <LinearLayout
-        android:layout_marginTop="48dp"
-        android:background="@drawable/bg_calendar"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="55dp">
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="wrap_content"
-            android:layout_height="340dp">
 
-        </CalendarView>
 
-    </LinearLayout>
 
     <Button
         android:id="@+id/Button"
