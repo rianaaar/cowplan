@@ -8,9 +8,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.psbo.cowplan.Model.data_sapi;
 
 
 import static android.text.TextUtils.isEmpty;
@@ -58,6 +60,14 @@ public class PilihKategori extends AppCompatActivity {
                 if(isEmpty(getNama_sapi) && isEmpty(getTanggal_birahi) && isEmpty(getTanggal_melahirkan)){
                     //Jika Ada, maka akan menampilkan pesan singkan seperti berikut ini.
                     Toast.makeText(PilihKategori.this, "Data tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
+                }else {
+        /*
+        Jika Tidak, maka data dapat diproses dan meyimpannya pada Database
+        Menyimpan data referensi pada Database berdasarkan User ID dari masing-masing Akun
+        */
+                    getReference.child("Users").child(getUserID).child("Sapi").push()
+                            .setValue(new data_sapi(getNama_sapi, getTanggal_birahi, getTanggal_melahirkan));
+
                 }
                 //open_MainActivity();
             }

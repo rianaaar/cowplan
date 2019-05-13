@@ -1,5 +1,7 @@
 package com.psbo.cowplan.Model;
+import com.google.firebase.database.IgnoreExtraProperties;
 
+@IgnoreExtraProperties
 public class data_sapi {
 
     //Deklarasi Variable
