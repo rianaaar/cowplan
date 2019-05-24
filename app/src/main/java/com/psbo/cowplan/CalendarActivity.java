@@ -49,10 +49,10 @@ public class CalendarActivity extends AppCompatActivity {
                 int mDay = c.get(Calendar.DAY_OF_MONTH);
 
                 // display the current date
-                String CurrentDate = mYear + "/" + mMonth + "/" + mDay;
+               // String CurrentDate = mYear + "/" + mMonth + "/" + mDay;
 
                 String dateInString = date; // Start date
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.UK);
 
                 c = Calendar.getInstance();
 
@@ -64,10 +64,11 @@ public class CalendarActivity extends AppCompatActivity {
                 }
 
                 c.add(Calendar.DATE, 21);//insert the number of days you want to be added to the current date
-                sdf = new SimpleDateFormat("dd/MM/yyyy");
+                sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
                 Date resultdate = new Date(c.getTimeInMillis());
                 dateInString = sdf.format(resultdate);
-                myDate.setText(dateInString);
+                myDate.setText(date);
+                theDate.setText(dateInString);
             }
         });
         button = (Button) findViewById(R.id.Button);
