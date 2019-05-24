@@ -17,7 +17,6 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar">
-<<<<<<< HEAD
         </activity>
         <activity android:name=".WelcomeActivity">
             <intent-filter>
@@ -28,27 +27,13 @@
         <activity android:name=".MainActivity">
 
         </activity>
-=======
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".WelcomeActivity">
-        </activity>
-        <activity android:name=".MainActivity">
-         </activity>
->>>>>>> 8ddda040e2c956c751c518e6c2e7a4efc340aa12
+
         <activity android:name=".PhoneAuthActivity">
     </activity>
         <activity android:name=".CalendarActivity">
-<<<<<<< HEAD
         </activity>
         <activity android:name=".InputSapiActivity">
         </activity>
-=======
-            </activity>
->>>>>>> 8ddda040e2c956c751c518e6c2e7a4efc340aa12
     </application>
 
 </manifest>
