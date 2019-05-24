@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import com.psbo.cowplan.Model.data_sapi;
 
+import java.util.Calendar;
+
 public class InputSapiActivity extends AppCompatActivity {
 
     // variable yang merefers ke Firebase Realtime Database
@@ -29,12 +32,23 @@ public class InputSapiActivity extends AppCompatActivity {
     // variable fields EditText dan Button
     private FirebaseAuth auth;
     private Button button;
-    private EditText nama_sapi, tanggal_birahi, tanggal_melahirkan;
+    private EditText nama_sapi;
+    public String tanggal_birahi, tanggal_melahirkan;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_date);
+        Bundle bundle=getIntent().getExtras();
+        String value = bundle.getString("date");
+        tanggal_birahi = value;
+
+        Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        tanggal_melahirkan = mYear + "/" + mMonth + "/" + mDay;
 
         // inisialisasi fields EditText dan Button
         nama_sapi = findViewById(R.id.namasapi);
@@ -51,8 +65,8 @@ public class InputSapiActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isEmpty(nama_sapi.getText().toString()) && !isEmpty(tanggal_birahi.getText().toString()) && !isEmpty(tanggal_melahirkan.getText().toString()))
-                    submitSapi(new data_sapi(nama_sapi.getText().toString(), tanggal_birahi.getText().toString(), tanggal_melahirkan.getText().toString()));
+                if(!isEmpty(nama_sapi.getText().toString()))
+                    submitSapi(new data_sapi(nama_sapi.getText().toString(), tanggal_birahi, tanggal_melahirkan));
                 else
                     Snackbar.make(findViewById(R.id.button), "Data Tidak boleh kosng", Snackbar.LENGTH_LONG).show();
 
@@ -70,10 +84,6 @@ public class InputSapiActivity extends AppCompatActivity {
         return TextUtils.isEmpty(s);
     }
 
-    private void updateBarang(data_sapi barang) {
-        // kodingan untuk next tutorial ya :p
-    }
-
     private void submitSapi(data_sapi sapi) {
         /**
          * Ini adalah kode yang digunakan untuk mengirimkan data ke Firebase Realtime Database
@@ -87,9 +97,9 @@ public class InputSapiActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 nama_sapi.setText("");
-                tanggal_birahi.setText("");
-                tanggal_melahirkan.setText("");
                 Snackbar.make(findViewById(R.id.button), "Data berhasil ditambahkan", Snackbar.LENGTH_LONG).show();
+                Intent y = new Intent(InputSapiActivity.this, CalendarActivity.class);
+                startActivity(y);
             }
         });
     }
