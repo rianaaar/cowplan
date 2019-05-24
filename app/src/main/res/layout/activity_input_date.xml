@@ -23,22 +23,7 @@
         android:layout_marginLeft="130dp"
         android:layout_marginTop="50dp"
         />
-
-    <RadioButton
-        android:id="@+id/radioButton"
-        android:layout_marginTop="100dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Melahirkan"
-        android:textSize="25dp"/>
-
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Birahi"
-        android:textSize="25dp"/>
+    
 
     <EditText
         android:id="@+id/namasapi"

@@ -1,70 +1,88 @@
 package com.psbo.cowplan;
 
-
+import android.app.usage.UsageEvents;
+import android.arch.lifecycle.Lifecycle;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.sundeepk.compactcalendarview.CompactCalendarView;
-import com.github.sundeepk.compactcalendarview.domain.Event;
-
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Calendar;
+import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity {
 
-    CompactCalendarView compactCalendar;
     private Button button;
-    private CalendarView calendarView;
-    TextView myDate;
-    private static final String TAG = "CalendarActivity";
-    private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
-
+    CalendarView calendarView;
+    TextView myDate, theDate;
+    Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+
+        calendarView = (CalendarView) findViewById(R.id.calendarView);
         myDate = (TextView) findViewById(R.id.mydate);
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-       actionBar.setTitle(null);
-
-        compactCalendar = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
-        compactCalendar.setUseThreeLetterAbbreviation(true);
-
-
-        //set event
-        Event ev1 = new Event(Color.RED, 1477054800000L,"Test");
-        compactCalendar.addEvent(ev1);
-
-        compactCalendar.setListener(new CompactCalendarView.CompactCalendarViewListener() {
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onDayClick(Date dateClicked) {
-                Context context = getApplicationContext();
-                if(dateClicked.toString().compareTo("Mon Oct 21 2019")==0){
-                    Toast.makeText(context, "Prediksi Birahi Sapi", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(context, "Tidak ada prediksi", Toast.LENGTH_SHORT).show();
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                //String date = dayOfMonth + "/" + (month+1) + "/" + year;
+                String date = year + "/" + (month+1) + "/" + dayOfMonth;
+                Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                // display the current date
+                String CurrentDate = mYear + "/" + mMonth + "/" + mDay;
+
+                String dateInString = date; // Start date
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                c = Calendar.getInstance();
+
+                try {
+                    c.setTime(sdf.parse(dateInString));
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-            }
 
-            @Override
-            public void onMonthScroll(Date firstDayOfNewMonth) {
-                actionBar.setTitle(dateFormatMonth.format(firstDayOfNewMonth));
+                c.add(Calendar.DATE, 21);//insert the number of days you want to be added to the current date
+                sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date resultdate = new Date(c.getTimeInMillis());
+                dateInString = sdf.format(resultdate);
+                myDate.setText(dateInString);
             }
         });
-    }
-}
+        button = (Button) findViewById(R.id.Button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open_input_date();
+            }
+        });
 
+    }
+    public void open_input_date() {
+        Intent intent = new Intent(this, PilihKategori.class);
+        startActivity(intent);
+    }
+
+
+};
