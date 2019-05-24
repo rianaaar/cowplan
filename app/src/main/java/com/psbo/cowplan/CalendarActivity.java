@@ -42,10 +42,41 @@ public class CalendarActivity extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+<<<<<<< HEAD
                 String date = dayOfMonth + "/" + (month+1) + "/" + year;
                 //String date = year + "/" + (month+1) + "/" + dayOfMonth;
                 hitung_period();
                 myDate.setText(date);
+=======
+                //String date = dayOfMonth + "/" + (month+1) + "/" + year;
+                String date = year + "/" + (month+1) + "/" + dayOfMonth;
+                Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                // display the current date
+               // String CurrentDate = mYear + "/" + mMonth + "/" + mDay;
+
+                String dateInString = date; // Start date
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.UK);
+
+                c = Calendar.getInstance();
+
+                try {
+                    c.setTime(sdf.parse(dateInString));
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+                c.add(Calendar.DATE, 21);//insert the number of days you want to be added to the current date
+                sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
+                Date resultdate = new Date(c.getTimeInMillis());
+                dateInString = sdf.format(resultdate);
+                myDate.setText(date);
+                theDate.setText(dateInString);
+>>>>>>> 8ddda040e2c956c751c518e6c2e7a4efc340aa12
             }
         });
         button = (Button) findViewById(R.id.Button);

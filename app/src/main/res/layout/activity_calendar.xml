@@ -36,6 +36,7 @@
     </LinearLayout>
 
     <TextView
+<<<<<<< HEAD
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="120dp"
@@ -51,6 +52,14 @@
         android:text="tanggal birahi"
         android:textColor="#FFF"
         android:textSize="10dp"
+=======
+        android:id="@+id/theDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="KALENDER"
+        android:textColor="#FFF"
+        android:textSize="23dp"
+>>>>>>> 8ddda040e2c956c751c518e6c2e7a4efc340aa12
         android:layout_marginLeft="150dp"
         android:layout_marginTop="50dp"
         />
