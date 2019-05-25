@@ -6,6 +6,7 @@ Aplikasi untuk memprediksi tanggal inseminasi sapi
 Firebase</ul>
 
 <h3>Class Diagram</h3>
+<img src="classdiagram.png">
 
 <h3>Use Case Diagram</h3>
 <img src="usecase(1).png">
