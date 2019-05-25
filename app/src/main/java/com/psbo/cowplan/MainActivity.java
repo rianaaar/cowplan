@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         button = (Button) findViewById(R.id.btn_cal);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         startauthentication();
-
-
-        setContentView(R.layout.activity_main);
 
         SharedPreferences mPreferences;
         mPreferences = MainActivity.this.getSharedPreferences("User", MODE_PRIVATE);
@@ -81,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else{
-
-
             Intent y = new Intent(MainActivity.this, PhoneAuthActivity.class);
             y.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             y.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -90,22 +86,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
-
     public void signoutbutton(View s) {
         if (s.getId() == R.id.sign_out) {
-
-
-
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setMessage("Do you really want to Log Out ?").setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
-
                             SharedPreferences mPreferences;
-
                             mPreferences = getSharedPreferences("User", MODE_PRIVATE);
                             SharedPreferences.Editor editor = mPreferences.edit();
                             editor.clear();
@@ -116,9 +104,6 @@ public class MainActivity extends AppCompatActivity {
                             y.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             y.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(y);
-
-
-
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -130,8 +115,6 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.setTitle("Confirm");
             dialog.show();
-
-
         }
 
         }

@@ -277,7 +277,7 @@ public class PhoneAuthActivity extends AppCompatActivity implements
                                 public void onDataChange(DataSnapshot snapshot) {
                                     if (snapshot.getValue() != null) {
 
-                                        Intent y = new Intent(PhoneAuthActivity.this, CalendarActivity.class);
+                                        Intent y = new Intent(PhoneAuthActivity.this, MainActivity.class);
                                         y.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         y.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(y);
@@ -306,7 +306,7 @@ public class PhoneAuthActivity extends AppCompatActivity implements
                                         myRef.child("users").child(userID).child("contact").setValue(contactno);
 
 
-                                        Intent y = new Intent(PhoneAuthActivity.this, CalendarActivity.class);
+                                        Intent y = new Intent(PhoneAuthActivity.this, MainActivity.class);
                                         y.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         y.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(y);
