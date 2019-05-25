@@ -7,6 +7,10 @@ Firebase</ul>
 
 <h3>Class Diagram</h3>
 
+<h3>Use Case Diagram</h3>
+
+<h3>Activity Diagram</h3>
+
 
 <h3>Anti Pattern</h3>
 <ul>Brook's Law<br>
